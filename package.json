@@ -1,0 +1,25 @@
+{
+  "name": "wda",
+  "version": "1.0.0",
+  "description": "Web developer assistant - based gulp",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MakhonkoDenis/wda.git"
+  },
+  "author": "behaart",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/MakhonkoDenis/wda/issues"
+  },
+  "homepage": "https://github.com/MakhonkoDenis/wda#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-json-editor": "^2.2.1",
+    "gulp-notify": "^2.2.0",
+    "yargs": "^6.3.0"
+  }
+}

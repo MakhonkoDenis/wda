@@ -1,0 +1,32 @@
+{
+	"projectPath": "D:/localhost/test/",
+	"source": {
+		"style-scss": {
+			"input": "assets/scss/style.scss",
+			"output": "../../style.css",
+			"compress": true
+		},
+		"framework-scss": {
+			"input": "cherry-framework/**/*.scss",
+			"output": "min/*.css",
+			"compress": true
+		},
+		"plugin-scss": {
+			"input": "assets/scss/*.scss",
+			"output": "../css/min/*.css",
+			"compress": true
+		},
+		"theme-js": {
+			"input": "assets/js/*.js",
+			"ignor-input": "assets/js/*.min.js",
+			"output": "/min/*.js",
+			"compress": true
+		},
+		"theme-css": {
+			"input": "assets/css/*.css",
+			"ignor-input": "assets/css/*.min.css",
+			"output": "/min/*.css",
+			"compress": true
+		}
+	}
+}
