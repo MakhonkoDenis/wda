@@ -1,32 +1,62 @@
 {
-	"projectPath": "D:/localhost/test/",
+	"projectPath": "D:/work/test/",
 	"source": {
 		"style-scss": {
-			"input": "assets/scss/style.scss",
-			"output": "../../style.css",
-			"compress": true
+			"input": "assets/sass/style.scss",
+			"output": "../../",
+			"compress": false
 		},
 		"framework-scss": {
 			"input": "cherry-framework/**/*.scss",
-			"output": "min/*.css",
+			"output": "min/",
 			"compress": true
 		},
 		"plugin-scss": {
 			"input": "assets/scss/*.scss",
-			"output": "../css/min/*.css",
+			"output": "../css/min/",
 			"compress": true
 		},
-		"theme-js": {
-			"input": "assets/js/*.js",
-			"ignor-input": "assets/js/*.min.js",
-			"output": "/min/*.js",
+		"js": {
+			"input": "**/*.js",
+			"output": "min/",
+			"ignor-input": [
+				"!**/*.min.js"
+			],
 			"compress": true
 		},
-		"theme-css": {
-			"input": "assets/css/*.css",
-			"ignor-input": "assets/css/*.min.css",
-			"output": "/min/*.css",
+		"css": {
+			"input": "**/*.css",
+			"ignor-input": [
+				"!style.css",
+				"!rtl.css",
+				"!**/*.min.css",
+				"!**/dynamic.css",
+				"!**/dynamic/**/*.css"
+			],
+			"output": "min/",
 			"compress": true
 		}
-	}
+	},
+	"need-delete": [
+		"**/*.json",
+		"**/*.map",
+		"README.md",
+		".gitmodules",
+		".gitignore",
+		"cherry-framework/.git",
+		"cherry-framework/.gitignore",
+		"cherry-framework/.jscsrc",
+		"cherry-framework/.jshintignore",
+		"cherry-framework/.travis.yml",
+		"cherry-framework/codesniffer.ruleset.xml",
+		"cherry-framework/travis.sh",
+		"cherry-framework/config.json",
+		"cherry-framework/modules/cherry-plugin-updater",
+		"cherry-framework/modules/cherry-theme-updater",
+		"cherry-framework/modules/cherry-page-builder",
+		"cherry-framework/modules/cherry-post-types",
+		"cherry-framework/modules/cherry-creator",
+		"cherry-framework/modules/cherry-taxonomies",
+		"**/*.+(map|log|dll)"
+	]
 }
