@@ -1,5 +1,13 @@
 {
-	"projectPath": "D:/work/test/",
+	"projectPath": "",
+	"domen": "",
+	"browser": {
+		"open": false,
+		"apps": [
+			"chrome",
+			"firefox"
+		]
+	},
 	"source": {
 		"style-scss": {
 			"input": "assets/sass/style.scss",
@@ -12,7 +20,7 @@
 			"compress": true
 		},
 		"plugin-scss": {
-			"input": "assets/scss/*.scss",
+			"input": "assets/sass/*.scss",
 			"output": "../css/min/",
 			"compress": true
 		},

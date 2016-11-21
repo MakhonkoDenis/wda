@@ -4,7 +4,8 @@
 	const gulp       = require( 'gulp' ),
 		plumber      = require( 'gulp-plumber' ),
 		notify       = require('gulp-notify'),
-		rename       = require( 'gulp-rename' );
+		rename       = require( 'gulp-rename' ),
+		browserSync  = require('browser-sync').create();
 
 	let configPath   = `${__dirname}/config.json`,
 		config       = require( configPath ),
@@ -56,6 +57,16 @@
 			};
 
 			return outputObject;
+		},
+		browserSyncInit = ( data ) => {
+			browserSync.init({
+				files: data.projectPath + '**/*.php',
+				open: ( data.browser.open ) ? data.domen : false ,
+				host: data.domen,
+				proxy: data.domen,
+				online: true,
+				browser: data.browser.apps
+			});
 		};
 
 /**
@@ -66,28 +77,44 @@
 		.task( 'use-in', ( done ) => {
 			let yargs          = require( 'yargs' ),
 				jeditor        = require( 'gulp-json-editor' ),
-				newProjectPath = yargs.argv.path.replace( /\\/g, '/' ) + '/';
-
-			newProjectPath = newProjectPath.replace( /\/\//g, '/' );
+				messageText;
 
 			return gulp
 				.src( configPath )
 				.pipe( jeditor( function( json ) {
-					json.projectPath = newProjectPath;
+
+					if ( yargs.argv.path ) {
+						let path = ( yargs.argv.path + '/' ).replace( /\\|\/\/$/g, '/' );
+
+						json.projectPath = path;
+						messageText      = `URL: ${ path }`;
+					}
+
+					if ( yargs.argv.domen ) {
+						let domen = ( yargs.argv.domen + '/' ).replace( /\\|\/\/$/g, '/' );
+
+						json.domen = domen;
+						messageText     = `URL: ${ domen }`;
+					}
+
 					return json;
 				} ) )
 				.pipe( gulp.dest( './' ) )
 				.pipe( notify(
 					{
 						title:'The project is switched',
-						message: newProjectPath
+						message: () => messageText
 					}
 				) );
 		} )
 // Watch files
 		.task( 'watch', () => {
 			let source = config.source,
-				regexp = /[^(\\|\/)]*([a-zA-Z]+$)/gi;
+				regexp = /[^(\\|\/)]*([a-zA-Z]+$)/gi,
+				path = config.projectPath,
+				serverReload = browserSync.reload;
+
+			browserSyncInit( config );
 
 			for ( let key in source ) {
 				let fileData = parsedSrc( source[ key ], config.projectPath );
@@ -112,15 +139,16 @@
 							compress: fileData.compress
 						}
 
-						fileData.taskFunction( data );
+						fileData.taskFunction( data, serverReload );
 					} )
 			};
+
 		} )
 		.task( 'compress-image', compressImage )
 		.task( 'clean', cleaner );
 
 // Compile Scss
-	function compileScss( data ){
+	function compileScss( data, server ){
 		let sass            = require( 'gulp-sass' ),
 			autoprefixer    = require('gulp-autoprefixer'),
 			compileSettings = {},
@@ -140,6 +168,7 @@
 				filePath.basename += suffix;
 			} ) )
 			.pipe( gulp.dest( data.output ) )
+			.pipe( server( {stream: true} ) )
 			.pipe( notify(
 				{
 					title:'Compile SASS Success!',
@@ -149,10 +178,11 @@
 	}
 
 // Compress Image
-	function compressJs ( data ){
+	function compressJs ( data, server ){
 		let uglify = require( 'gulp-uglify' ),
 			suffix = ( true === data.compress ) ? '.min' : '';
 
+						;
 		return gulp
 			.src( data.input )
 			.pipe( plumber() )
@@ -161,6 +191,7 @@
 				filePath.basename += suffix;
 			} ) )
 			.pipe( gulp.dest( data.output ) )
+			.pipe( server( {stream: true} ) )
 			.pipe( notify(
 				{
 					title:'Compress Java Script Success!',
@@ -170,7 +201,7 @@
 	}
 
 // Compress Image
-	function compressCss( data ){
+	function compressCss( data, server ){
 		let uglifycss = require( 'gulp-uglifycss' ),
 			suffix = ( true === data.compress ) ? '.min' : '';
 
@@ -182,6 +213,7 @@
 				filePath.basename += suffix;
 			} ) )
 			.pipe( gulp.dest( data.output ) )
+			.pipe( server( {stream: true} ) )
 			.pipe( notify(
 				{
 					title:'Compress Css Success!',
