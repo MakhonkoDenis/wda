@@ -4,35 +4,27 @@
 	"browser": {
 		"open": false,
 		"apps": [
-			"chrome",
-			"firefox"
+			"chrome"
 		]
 	},
 	"source": {
-		"style-scss": {
+		"scss": [{
 			"input": "assets/sass/style.scss",
 			"output": "../../",
 			"compress": false
-		},
-		"framework-scss": {
+		}, {
+			"input": "assets/sass/**/*.scss",
+			"output": "../css/min/",
+			"ignor-input": [
+				"!assets/sass/style.scss"
+			],
+			"compress": true
+		}, {
 			"input": "cherry-framework/**/*.scss",
 			"output": "min/",
 			"compress": true
-		},
-		"plugin-scss": {
-			"input": "assets/sass/*.scss",
-			"output": "../css/min/",
-			"compress": true
-		},
-		"js": {
-			"input": "**/*.js",
-			"output": "min/",
-			"ignor-input": [
-				"!**/*.min.js"
-			],
-			"compress": true
-		},
-		"css": {
+		}],
+		"css": [{
 			"input": "**/*.css",
 			"ignor-input": [
 				"!style.css",
@@ -43,10 +35,24 @@
 			],
 			"output": "min/",
 			"compress": true
-		}
+		}],
+		"js": [{
+			"input": "**/*.js",
+			"output": "min/",
+			"ignor-input": [
+				"!**/*.min.js"
+			],
+			"compress": true
+		}],
+		"img": [{
+			"input": "**/*.+(jpg|jpeg|png|svg|gif)"
+		}],
+		"php": [{
+			"input": "**/*.php",
+			"ignor-input": []
+		}]
 	},
 	"need-delete": [
-		"**/*.json",
 		"**/*.map",
 		"README.md",
 		".gitmodules",
