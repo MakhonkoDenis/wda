@@ -16,14 +16,14 @@ module.exports = ( configPath, gulp ) => {
 		.pipe( jeditor( function( json ) {
 
 			if ( yargs.argv.path ) {
-				let path = ( yargs.argv.path + '/' ).replace( /\\\\$|\/\/$|\\/g, '/' );
+				let path = ( yargs.argv.path + '/' ).replace( /\\\\$|\/\/$|\\\/$|\\/g, '/' );
 
 				json.projectPath = path;
 				messageText      = `PATH: ${ path }`;
 			}
 
 			if ( yargs.argv.domen ) {
-				let domen = ( yargs.argv.domen + '/' ).replace( /\\\\$|\/\/$|\\/g, '/' );
+				let domen = ( yargs.argv.domen + '/' ).replace( /\\\\$|\/\/$|\\\/$|\\/g, '/' );
 
 				json.domen = domen;
 				messageText     = `URL: ${ domen }`;
