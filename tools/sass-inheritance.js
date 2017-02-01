@@ -7,10 +7,10 @@ module.exports = function sassInheritance( path, file, scssSource ) {
 		key, importedBy;
 
 	for ( key in files.index ) {
-		file = file.replace( /\/|\\/g, '\\' );
-		key = key.replace( /\/|\\/g, '\\' );
+		file = file.replace( /\/|\\/g, '\/' );
+		key = key.replace( /\/|\\/g, '\/' );
 
-		if ( file !== key){
+		if ( file !== key ){
 			continue;
 		}
 
@@ -23,7 +23,7 @@ module.exports = function sassInheritance( path, file, scssSource ) {
 			for ( let files of scssSource ) {
 				let sourceFiles = path + files.input;
 
-				sourceFiles = sourceFiles.replace( /\/|\\/g, '\\' );
+				sourceFiles = sourceFiles.replace( /\/|\\/g, '\/' );
 
 				if ( sourceFiles === file ) {
 					data.output = files.output;
