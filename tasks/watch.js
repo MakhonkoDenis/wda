@@ -6,7 +6,7 @@ module.exports = ( config, gulp ) => {
 		path        = config.projectPath;
 
 	browserSync.init( {
-		files: source.php[0].input,
+		files: config.projectPath + source.php[0].input,
 		open: ( config.browser.open ) ? config.domen : false ,
 		proxy: config.domen,
 		online: true,
