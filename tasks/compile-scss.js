@@ -8,7 +8,7 @@ module.exports = function compileScss( data, server, gulp ){
 		notify          = require( 'gulp-notify' ),
 		compileSettings = {},
 		suffix          = '';
-
+console.log(data.compress);
 	if ( true === data.compress ) {
 		compileSettings.outputStyle = 'compressed';
 		suffix = '.min';
