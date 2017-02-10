@@ -13,6 +13,10 @@
 			"output": "../../",
 			"compress": false
 		}, {
+			"input": "framework/**/*.scss",
+			"output": "../css/",
+			"compress": false
+		}, {
 			"input": "assets/sass/**/*.scss",
 			"output": "../css/min/",
 			"ignor-input": [

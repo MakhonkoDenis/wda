@@ -5,7 +5,7 @@ module.exports = function sassInheritance( path, file, scssSource ) {
 	let sassGraph = require( 'sass-graph' ),
 		os = require( 'os' ),
 		osType = os.type(),
-		slashType = '//',
+		slashType = '\\',
 		files = ( filesSistem ) ? filesSistem : sassGraph.parseDir( path, { extensions: [ 'scss' ] } ),
 		key, importedBy;
 
